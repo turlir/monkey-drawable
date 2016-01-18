@@ -1,18 +1,16 @@
 # -*- coding: UTF-8 -*-
-# папка назначения есть аргумент to - то, куда будут разложены файлы
-# хранилище есть аргумент fromd - то, откуда будет скопированы файлы
 
 from helper import *
 import shutil
 
 def parseArg ():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--fromd", default = os.getcwd())
-    parser.add_argument("-t", "--to", required = True)
-    parser.add_argument("-r", "--rule", required = False)
-    parser.add_argument("-s", "--source", required = True)
-    parser.add_argument("-d", "--dest", required = False)
-    parser.add_argument("--debug", default = False, required = False, action='store_true')
+    parser.add_argument("-f", "--fromd", default = os.getcwd(), help = "Задает директорию, в которой следует искать файлы изображений.")
+    parser.add_argument("-t", "--to", required = True, help = "Задает директорию, в которой следует искать drawable-папки (res).")
+    parser.add_argument("-r", "--rule", required = False, help = "Задает стратегию сопоставления имя_изображения-целевая папка.")
+    parser.add_argument("-s", "--source", required = True, help = "Задает регулярное выражение (имена исходных файлов).")
+    parser.add_argument("-d", "--dest", required = False, help = "Задает имя конечного файла.")
+    parser.add_argument("--debug", default = False, required = False, action='store_true', help = "Переход в отладочный режим, файлы скопированы не будут.")
     args = parser.parse_args()
 
     return args
@@ -29,7 +27,7 @@ def dpi(from_list, to_list, dest):
 
 def size(from_list, to_list, dest):
 	r = sizeRule(from_list, to_list, dest)
-	
+
 	return r.work()
 
 def copy(func, from_list, to_list, dest, debug):
