@@ -204,3 +204,32 @@ class dpiRule:
             print(s)
 
         return dict(zip(self.fromList, g))
+
+class sizeRule:
+    def __init__(self, from_list, to_list, dest):
+        self.fromList = from_list
+        self.toList = to_list
+        self.dest = dest
+
+    def work(self):
+        print("size rule worked \n")
+
+        first_basename = os.path.basename(self.toList[0])
+        if(first_basename == "drawable"):
+            self.toList.remove(self.toList[0])
+        else:
+            print("dir drawable is not find")
+
+        self.fromList = sorted(self.fromList, key = lambda x: x.area)
+
+        if(len(self.fromList) != len(self.toList)):
+            print("invalid count size rule")
+            sys.exit()
+
+        g = list(map(lambda x: str(x + "/" + self.dest), self.toList))
+
+        for i in range(0, len(g)):
+            s = '{0} - {1}'.format(self.fromList[i].name, g[i])
+            print(s)
+
+        return dict(zip(self.fromList, g))

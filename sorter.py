@@ -28,9 +28,11 @@ def dpi(from_list, to_list, dest):
     return r.work()
 
 def size(from_list, to_list, dest):
-    pass
+	r = sizeRule(from_list, to_list, dest)
+	
+	return r.work()
 
-def copy(func, from_list, to_list, dest):
+def copy(func, from_list, to_list, dest, debug):
     # fromList - toList
     # что копировать - куда копировать
     comprasion = func(from_list, to_list, dest)
@@ -40,7 +42,7 @@ def copy(func, from_list, to_list, dest):
     keys = list(comprasion.keys())
     values = list(comprasion.values())
 
-    raw_copy(keys, values)
+    if(not debug): raw_copy(keys, values)
 
 def raw_copy(keys, values):
     q = 0
@@ -121,4 +123,4 @@ if __name__ == "__main__":
 
     comprasion_func = rules[rule]
 
-    copy(comprasion_func, from_list, to_list, dest)
+    copy(comprasion_func, from_list, to_list, dest, debug)
