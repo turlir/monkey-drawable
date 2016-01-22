@@ -8,7 +8,7 @@ def parseArg ():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--fromd", default = os.getcwd(), help = "Задает директорию, в которой следует искать файлы изображений.")
     parser.add_argument("-t", "--to", required = True, help = "Задает директорию, в которой следует искать drawable-папки (res).")
-    parser.add_argument("-r", "--rule", required = False, help = "Задает стратегию сопоставления имя_изображения-целевая папка.")
+    parser.add_argument("-r", "--rule", required = False, help = "Задает стратегию сопоставления имя_изображения-целевая папка. " + str(list(rules)))
     parser.add_argument("-s", "--source", required = True, help = "Задает регулярное выражение (имена исходных файлов).")
     parser.add_argument("-d", "--dest", required = False, help = "Задает имя конечного файла.")
     parser.add_argument("--debug", default = False, required = False, action='store_true', help = "Переход в отладочный режим, файлы скопированы не будут.")
@@ -71,6 +71,12 @@ def raw_copy(keys, values):
 
         q+=1
 
+rules = {
+        "one" : one,
+        "dpi" : dpi,
+        "size" : size
+    }
+
 if __name__ == "__main__":
     args = parseArg()
 
@@ -87,12 +93,6 @@ if __name__ == "__main__":
         print('source = ', source)
         print('dest = ', dest)
         print("rule = ", rule)
-
-    rules = {
-        "one" : one,
-        "dpi" : dpi,
-        "size" : size
-    }
 
     if(rule == None): rule = "one"
     if(rule not in rules):
