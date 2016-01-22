@@ -6,12 +6,26 @@ import shutil
 
 def parseArg ():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--fromd", default = os.getcwd(), help = "Задает директорию, в которой следует искать файлы изображений.")
-    parser.add_argument("-t", "--to", required = True, help = "Задает директорию, в которой следует искать drawable-папки (res).")
-    parser.add_argument("-r", "--rule", required = False, help = "Задает стратегию сопоставления имя_изображения-целевая папка. " + str(list(rules)))
-    parser.add_argument("-s", "--source", required = True, help = "Задает регулярное выражение (имена исходных файлов).")
-    parser.add_argument("-d", "--dest", required = False, help = "Задает имя конечного файла.")
-    parser.add_argument("--debug", default = False, required = False, action='store_true', help = "Переход в отладочный режим, файлы скопированы не будут.")
+    parser.add_argument("-f", "--fromd", default = os.getcwd(),
+        help = "Задает директорию, в которой следует искать файлы изображений.")
+
+    parser.add_argument("-t", "--to", required = True,
+        help = "Задает директорию, в которой следует искать drawable-папки (res).")
+
+    parser.add_argument("-r", "--rule", required = False,
+        help = "Задает стратегию сопоставления имя_изображения-целевая папка. "
+            + str(list(rules)))
+
+    parser.add_argument("-s", "--source", required = True,
+        help = "Задает регулярное выражение (имена исходных файлов).")
+
+    parser.add_argument("-d", "--dest", required = False,
+        help = "Задает имя конечного файла.")
+
+    parser.add_argument("--debug", default = False, required = False,
+        action='store_true',
+        help = "Переход в отладочный режим, файлы скопированы не будут.")
+
     args = parser.parse_args()
 
     return args
