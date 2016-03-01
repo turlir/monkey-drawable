@@ -3,6 +3,7 @@ import argparse
 import os
 import fnmatch
 import glob
+import re
 from PIL import Image # pillow.readthedocs.org/en/3.0.x/installation.html
 
 class fromItem:
@@ -118,11 +119,12 @@ class toAnalyzer:
     def filter (self, lst):
         # фильтр
         filtred = []
+        prog = re.compile(".*drawable-[^ldpi]*dpi")
         for item in lst:
-            if(os.path.isdir(item) and (item not in "ldpi")):
+            if(os.path.isdir(item) and prog.match(item)):
                 filtred.append(item)
         if(self.debug):
-            print("filtred")
+            print("filtred to")
             for str in filtred: print(str)
 
         return filtred
